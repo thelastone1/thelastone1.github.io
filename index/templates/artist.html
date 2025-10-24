@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<section id="contents" class="contents">
+    <div class="container">
+        <section id="artistlist">
+            <div class="section-title">
+                <h2>아티스트</h2>
+            </div>
+            <div class="row align-items-center contents">
+                {%for artist in artist_list%}
+                <div class="col-lg-2 col-md-4 col-6 contents-item">
+                    <a href="{% url 'musicapp:artist' %}{{ artist.artist_uuid }}">
+                        <div class="cover">
+                        {% if artist.artist_image %}
+                            <img class="artwork" src="/{{ artist.artist_image }}" alt="{{ artist.artist_name }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="100" height="100" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="8" r="4" stroke="#888" stroke-width="1.5"/>
+                                    <path d="M4 20c0-4 4-7 8-7s8 3 8 7" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                        </div>
+                        <h5>{{artist.artist_name}}</h5>
+                        <span class="samplecount">{{artist.sample_count}}개 샘플</span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</section><!-- End contents Section -->
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="/">4DIGGER</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li>
+                        <div class="search-container">
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                class="search-input" 
+                                placeholder="아티스트, 앨범, 곡 제목 검색..." 
+                                autocomplete="off"
+                            >
+                            
+                            <!-- 검색 결과 드롭다운 -->
+                            <div id="searchResults" class="search-results"></div>
+                        </div>
+                    </li>
+
+                    <!-- <li><a class="nav-link" href="{% url 'musicapp:index' %}">홈</a></li> -->
+                    <li><a class="nav-link" href="{% url 'musicapp:browse' %}">둘러보기</a></li>
+                    <li><a class="nav-link" href="{% url 'musicapp:artist' %}">아티스트</a></li>
+                    <li><a class="nav-link" href="{% url 'musicapp:album' %}">앨범</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->

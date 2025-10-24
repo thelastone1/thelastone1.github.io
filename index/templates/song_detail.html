@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<section id="pagetopbar">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+         <span>
+            {{song.song_title}}
+            {% if songFeatArtist|length >= 1 %}
+                ( Feat. 
+                {% for feat in songFeatArtist%}
+                <span>{{ feat.artist.artist_name | truncatechars:30 }}</span>
+                {% if not forloop.last %},{% endif %}
+                {% endfor %}
+                )
+                {% else %}
+                <span>{{ songFeatArtist.artist.artist_name | truncatechars:30 }}</span>
+            {% endif %}
+        </span>
+    </div>
+</section>
+
+<section id="pageinfo" class="pageinfo">
+    <div class="container">
+        <div class="pageheader">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-sm-12 mb-3 mb-md-0">
+                    <div class="cover">
+                        {% if song.song_album.album_image %}
+                            <img class="artwork" src="/{{ song.song_album.album_image }}" alt="{{ song.song_album.album_title }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M6 12c0-1.7.7-3.2 1.8-4.2"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                    <path d="M18 12c0 1.7-.7 3.2-1.8 4.2"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-12">
+                    <p class="page-title">{{song}}</p>
+                    <p class="page-albumtitle">
+                        <a href="{% url 'musicapp:album' %}{{ song.song_album.album_uuid}}">{{song.song_album.album_title | truncatechars:30 }}</a>
+                    </p>
+                    <span class="page-songartist">
+                        <a href="{% url 'musicapp:artist' %}{{ songMainArtist.artist.artist_uuid }}/">{{ songMainArtist.artist.artist_name  | truncatechars:30}}</a>
+                    </span>
+                    {% for feat in songFeatArtist%}
+                        <span class="page-songartist">
+                            <a href="{% url 'musicapp:artist' %}{{ feat.artist.artist_uuid }}/"> {{ feat.artist.artist_name | truncatechars:30 }}</a>
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contents" class="contents">
+    <div class="container">
+        {% if sampled %}
+        <section id="sampled">
+            <div class="section-title">
+                <h2>샘플링 곡</h2>
+            </div>
+            {% for sampled_info in sampled %}
+            <a href="/compare/{{sampled_info.sampling_song.song_uuid}}">
+                <div class="col songlist">
+                    <h4>▷</h4>
+                    <div class="cover">
+                        {% if sampled_info.sampling_song.song_album.album_image %}
+                            <img class="artwork" src="/{{ sampled_info.sampling_song.song_album.album_image }}" alt="{{ sampled_info.sampling_song.song_album.album_title }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M6 12c0-1.7.7-3.2 1.8-4.2"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                    <path d="M18 12c0 1.7-.7 3.2-1.8 4.2"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4>{{sampled_info.sampling_song.song_title | truncatechars:30 }}</h4>
+                        {% for artistinfo in sampled_info.sampling_song.songartist_set.all %}
+                            <span>{{ artistinfo.artist.artist_name  | truncatechars:30 }}</span>
+                        {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </div>                    
+                </div>
+            </a>
+            {% endfor %}
+        </section>
+        {% else %}
+        <section id="sampled">
+            <div class="section-title">
+                <h2>원곡</h2>
+            </div>
+            {% for sampling_info in sampling %}
+            <a href="/compare/{{sampling_info.sampling_song.song_uuid}}">
+                <div class="col songlist">
+                    <h4>▷</h4>
+                    <div class="cover">
+                        {% if sampling_info.original_song.song_album.album_image %}
+                            <img class="artwork" src="/{{ sampling_info.original_song.song_album.album_image }}" alt="{{ sampled_info.sampling_song.song_album.album_title }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M6 12c0-1.7.7-3.2 1.8-4.2"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                    <path d="M18 12c0 1.7-.7 3.2-1.8 4.2"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4>{{sampling_info.original_song.song_title | truncatechars:30 }}</h4>
+                        {% for artistinfo in sampling_info.original_song.songartist_set.all %}
+                            <span>{{ artistinfo.artist.artist_name | truncatechars:30 }}</span>
+                        {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </div>                    
+                </div>
+            </a>
+            {% endfor %}
+        </section>
+        {% endif %}
+    </div>
+</section>
+
+
+
+{% endblock %}

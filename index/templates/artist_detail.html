@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<section id="pagetopbar">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+        <span>{{ artist.artist_name | truncatechars:40}}</span>
+        <h1>{{ song1 }}</h1>
+    </div>
+</section>
+<section id="pageinfo" class="pageinfo">
+    <div class="container">
+        <div class="pageheader">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-sm-12 mb-3 mb-md-0">
+                    <div class="cover">
+                        {% if artist.artist_image %}
+                            <img class="artwork" src="/{{ artist.artist_image }}" alt="{{ artist.artist_name }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="100" height="100" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="8" r="4" stroke="#888" stroke-width="1.5"/>
+                                    <path d="M4 20c0-4 4-7 8-7s8 3 8 7" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-12">
+                    <p class="page-title">{{ artist.artist_name | truncatechars:30 }}</p>
+                    
+                    {% if artist.artist_member %}
+                    <p class="page-artistmember">{{ artist.artist_member | truncatechars:30 }}</p>
+                    {% endif %}
+
+                    {% if artist.artist_group %}
+                    <p class="page-artistgroupname">{{ artist.artist_group | truncatechars:30 }}</p>
+                    {% endif %}
+
+                    <h6><span class="samplecount">{{artist.sample_count}}개 샘플 정보</span></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= Artist contents Section ======= -->
+<section id="contents" class="contents">
+    <div class="container">
+        {% if main_songs %}
+        <section id="tracks">
+            <div class="section-title">
+                <!-- <h2>인기</h2> -->
+                 <h2>곡 목록</h2>
+            </div>
+            {% include "artist_detail_song_list.html" with song=main_songs %}
+        </section>
+        {% endif %}
+
+        {% if feat_songs %}
+        <section id="featuring">
+            <div class="section-title">
+                 <h2>참여곡 목록</h2>
+            </div>
+            {% include "artist_detail_song_list.html" with song=feat_songs %}
+        </section>
+        {% endif %}
+
+        {% if sampled %}
+        <section id="sampled">
+            <div class="section-title">
+                <h2>샘플링 곡</h2>
+            </div>
+            {% for sampled_info in sampled %}
+            <a href="{% url 'musicapp:compare' sampled_info.sampling_song.song_uuid %}">
+                <div class="col songlist">
+                    <h4>▷</h4>
+                    <div class="cover">
+                        {% if sampled_info.sampling_song.song_album.album_image %}
+                            <img class="artwork" src="/{{ sampled_info.sampling_song.song_album.album_image }}" alt="{{ sampled_info.sampling_song.song_album.album_title }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M6 12c0-1.7.7-3.2 1.8-4.2"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                    <path d="M18 12c0 1.7-.7 3.2-1.8 4.2"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4>{{sampled_info.sampling_song.song_title}}</h4>
+                        {% for artistinfo in sampled_info.sampling_song.songartist_set.all %}
+                            <span>{{ artistinfo.artist.artist_name }}</span>
+                        {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </div>                    
+                </div>
+            </a>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        {% if album %}
+        <section id="discography">
+            <div class="section-title">
+                <h2>디스코그래피</h2>
+            </div>
+
+            <div class="albumtype">
+                <ul id="album-filters">
+                    <li data-filter="*" class="filter-active">전체</li>
+                    {% for albumtype_info in albumtype %}
+                        {%if albumtype_info.album_type != 'album' %}
+                        <li data-filter=".filter-epsingle">싱글 및 EP</li>
+                        {%else%}
+                        <li data-filter=".filter-album">앨범</li>
+                        {%endif%}
+                    {%endfor%}
+                </ul>
+            </div>
+
+            <div class="row discography albumlist">
+                {%for albumlist in album%}
+                {% if albumlist.album_sample_count != 0 %}
+                    {%if albumlist.album_type != 'album' %}
+                    <div class="col-lg-2 col-md-4 col-6 contents-item filter-epsingle">
+                    {%else%}
+                    <div class="col-lg-2 col-md-4 col-6 contents-item filter-album">
+                    {%endif%}
+                    <a href="{% url 'musicapp:album' %}{{albumlist.album_uuid}}">
+                        <div class="cover">
+                        {% if albumlist.album_image %}
+                            <img class="artwork" src="/{{ albumlist.album_image }}" alt="{{ albumlist.album_title }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M6 12c0-1.7.7-3.2 1.8-4.2"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                    <path d="M18 12c0 1.7-.7 3.2-1.8 4.2"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                        </div>
+                        <h5>{{albumlist.album_title}}</h5>
+                        <p>{{albumlist.get_album_type_display}}</p>
+                        <div class="contents-item-info">
+                            <p>{{albumlist.album_release_date | date:'Y'}}</p>
+                            <span class="samplecount">{{albumlist.album_sample_count}}개 샘플</span>
+                        </div>
+                    </a>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </div>
+</section><!-- End contents Section -->
+{% endblock %}

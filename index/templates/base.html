@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>4DIGGER</title>
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body
+    data-search-url="{% url 'musicapp:search_autocomplete' %}"
+    data-artist-url="{% url 'musicapp:artist_detail' 0 %}"
+    data-album-url="{% url 'musicapp:album_detail' 0 %}"
+    data-song-url="{% url 'musicapp:song' 0 %}" >
+    
+    {% include 'header.html' %}
+    <main id="main">
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% include 'footer.html' %}    
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static '/js/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<section id="pagetopbar">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+        <span>{{ album.album_title | truncatechars:40 }}</span>
+    </div>
+</section>
+
+<section id="pageinfo" class="pageinfo">
+    <div class="container">
+        <div class="pageheader">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-sm-12 mb-3 mb-md-0">
+                    <div class="cover">
+                        {% if album.album_image %}
+                            <img class="artwork" src="/{{ album.album_image }}" alt="{{ album.album_title }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M6 12c0-1.7.7-3.2 1.8-4.2"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                    <path d="M18 12c0 1.7-.7 3.2-1.8 4.2"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-12">
+                    <p class="page-title">{{ album.album_title | truncatechars:30  }}</p>
+                    <p class="page-albumartist">
+                        <a href="{% url 'musicapp:artist' %}{{ album.album_artist.artist_uuid }}/">{{ album.album_artist.artist_name | truncatechars:30  }}</a>
+                    </p>
+                    <p class="page-albumtype">{{ album.get_album_type_display }} • {{ album.album_release_date | date:'Y.m.d'}}</p>
+                    
+                    <span class="samplecount">{{album.album_sample_count}}개 샘플</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= Album contents Section ======= -->
+<section id="contents" class="contents">
+    <div class="container">
+        <section id="tracklist">
+            <div class="section-title">
+                <h2>트랙 목록</h2>
+            </div>
+            {% for song in song_info %}            
+            <a href="/song/{{song.song_uuid}}">
+                <div class="col-lg-12 songlist">
+                    <h4>{{forloop.counter}}</h4>
+                    <div class="cover">
+                        {% if song.song_album.album_image %}
+                            <img class="artwork" src="/{{ song.song_album.album_image }}" alt="{{ song.song_album.album_title }}">
+                        {% else %}
+                            <div class="cover-placeholder">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M6 12c0-1.7.7-3.2 1.8-4.2"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                    <path d="M18 12c0 1.7-.7 3.2-1.8 4.2"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4>{{song.song_title | truncatechars:30}}</h4>
+                        {% for artist in song.song_artists.all %}
+                            <span>{{ artist.artist_name | truncatechars:30}}</span>
+                        {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}            
+        </section>
+    </div>
+</section><!-- End contents Section -->
+
+{% endblock %}

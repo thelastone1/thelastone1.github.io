@@ -1,0 +1,947 @@
+/**
+* Template Name: Day - v4.7.0
+* Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: "Open Sans", sans-serif;
+  /* color: #444444; */
+  color: #fff;
+  font-size : 14px;
+  background: rgba(25, 25, 25, 0.95);
+  
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+  color: #ffffff;
+}
+
+p {
+  color: #ffffff;
+}
+
+main {
+  flex:1;
+  padding-top: 60px;
+  margin-bottom: 30px;
+}
+
+/* 768px 이하 (모바일)에서만 세로 중앙 정렬용 스타일 적용 */
+@media (max-width: 768px), (max-width: 991px) {
+  .row {
+    align-items: center !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 996;
+  background: #cc1616;
+  width: 40px;
+  height: 40px;
+  transition: all 0.4s;
+}
+.back-to-top i {
+  font-size: 28px;
+  color: #fff;
+  line-height: 0;
+}
+.back-to-top:hover {
+  background: #e72323;
+  color: #fff;
+}
+.back-to-top.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
+# Preloader
+--------------------------------------------------------------*/
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #fff;
+}
+
+#preloader:before {
+  content: "";
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border: 6px solid #cc1616;
+  border-top-color: #efefef;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 1s linear infinite;
+}
+
+@-webkit-keyframes animate-preloader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-preloader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/*--------------------------------------------------------------
+# Disable aos animation delay on mobile devices
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
+/*--------------------------------------------------------------
+# Top Bar
+--------------------------------------------------------------*/
+#topbar {
+  background: #191919;
+  font-size: 15px;
+  height: 40px;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+#topbar .contact-info a {
+  line-height: 0;
+  color: rgba(255, 255, 255, 0.6);
+  transition: 0.3s;
+}
+#topbar .contact-info a:hover {
+  color: #fff;
+}
+#topbar .contact-info i {
+  color: #cc1616;
+  line-height: 0;
+  margin-right: 5px;
+}
+#topbar .contact-info .phone-icon {
+  margin-left: 15px;
+}
+#topbar .social-links a {
+  color: rgba(255, 255, 255, 0.6);
+  padding: 4px 12px;
+  display: inline-block;
+  line-height: 1px;
+  transition: 0.3s;
+}
+#topbar .social-links a:hover {
+  color: #fff;
+}
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+  background: rgba(25, 25, 25, 0.95);
+  transition: all 0.5s;
+  z-index: 997;
+  height: 60px;
+  position: fixed;
+  width: 100%;
+}
+
+#header .logo {
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+#header .logo a {
+  color: #fff;
+}
+#header .logo img {
+  max-height: 40px;
+}
+
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/**
+* Desktop Navigation 
+*/
+.navbar {
+  padding: 0;
+}
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+.navbar li {
+  position: relative;
+}
+.navbar > ul > li {
+  margin-left: 5px;
+}
+/* .navbar a, .navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #fff;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+.navbar a i, .navbar a:focus i {
+  font-size: 12px;
+  line-height: 0;
+  margin-left: 5px;
+}
+.navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
+  background: #ffffff;
+  color: #444444;
+} */
+.navbar .dropdown ul {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+}
+.navbar .dropdown ul li {
+  min-width: 200px;
+}
+.navbar .dropdown ul a {
+  padding: 10px 20px;
+  color: #191919;
+}
+.navbar .dropdown ul a i {
+  font-size: 12px;
+}
+.navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a {
+  color: #fff;
+}
+.navbar .dropdown:hover > ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+.navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+.navbar .dropdown .dropdown:hover > ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}
+@media (max-width: 1366px) {
+  .navbar .dropdown .dropdown ul {
+    left: -90%;
+  }
+  .navbar .dropdown .dropdown:hover > ul {
+    left: -100%;
+  }
+}
+
+/**
+* Mobile Navigation 
+*/
+.mobile-nav-toggle {
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  line-height: 0;
+  transition: 0.5s;
+}
+.mobile-nav-toggle.bi-x {
+  color: #cc1616;
+}
+
+@media (max-width: 991px) {
+  .mobile-nav-toggle {
+    display: block;
+  }
+
+  .navbar ul {
+    display: none;
+  }
+}
+.navbar-mobile {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  transition: 0.3s;
+  z-index: 999;
+}
+.navbar-mobile .mobile-nav-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.navbar-mobile ul {
+  display: block;
+  position: absolute;
+  top: 55px;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  padding: 10px 0;
+  background-color: #fff;
+  overflow-y: auto;
+  transition: 0.3s;
+}
+.navbar-mobile a, .navbar-mobile a:focus {
+  padding: 10px 20px;
+  font-size: 15px;
+  color: #191919;
+}
+.navbar-mobile a:hover, .navbar-mobile .active, .navbar-mobile li:hover > a {
+  color: #cc1616;
+  background: none;
+}
+.navbar-mobile .getstarted, .navbar-mobile .getstarted:focus {
+  margin: 15px;
+}
+.navbar-mobile .dropdown ul {
+  position: static;
+  display: none;
+  margin: 10px 20px;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 1;
+  visibility: visible;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+}
+.navbar-mobile .dropdown ul li {
+  min-width: 200px;
+}
+.navbar-mobile .dropdown ul a {
+  padding: 10px 20px;
+}
+.navbar-mobile .dropdown ul a i {
+  font-size: 12px;
+}
+.navbar-mobile .dropdown ul a:hover, .navbar-mobile .dropdown ul .active:hover, .navbar-mobile .dropdown ul li:hover > a {
+  color: #cc1616;
+}
+.navbar-mobile .dropdown > .dropdown-active {
+  display: block;
+}
+
+/*--------------------------------------------------------------
+# 검색, 검색 결과 드롭다운
+--------------------------------------------------------------*/
+
+/* 검색 컨테이너 */
+.search-container {
+    position: relative;
+    max-width: 800px;
+    min-width: 450px;
+    /* margin: 40px auto; */
+}
+
+/* 검색 입력창 */
+.search-input {
+  background:#1f1f1f;
+  color:#fff;
+  width: 100%;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: 2px solid #666;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    /* border-color: #667eea; */
+    border-color: #fff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+/* 검색 결과 드롭다운 */
+.search-results {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #999;
+    border-radius: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: none;
+}
+
+/* 결과 섹션 */
+.result-section {
+    padding: 10px 0;
+}
+
+.result-section:not(:last-child) {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.result-section-title {
+    padding: 2px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    /* color: #718096; */
+    color:#000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 결과 아이템 */
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+}
+
+.result-item:hover,
+.result-item.active {
+    /* background: #f7fafc; */
+    background: #eee;
+}
+
+.result-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.result-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.result-title {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-meta {
+    font-size: 0.9rem;
+    color: #718096;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 하이라이트 */
+mark {
+    background: #d2d2d2;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+/* 검색 결과 없음 */
+.no-results {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.no-results-text {
+    color: #718096;
+}
+
+/* 에러 메시지 */
+.error-message {
+    padding: 20px;
+    text-align: center;
+    color: #e53e3e;
+}
+
+/* 스크롤바 스타일 */
+.search-results::-webkit-scrollbar {
+    width: 8px;
+}
+
+.search-results::-webkit-scrollbar-track {
+    background: #f7fafc;
+    border-radius: 0 16px 16px 0;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 30px 0;
+  overflow: hidden;
+}
+
+.section-title {
+  position: relative;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  /* color: #191919; */
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+.section-title span {
+  position: absolute;
+  top: 30px;
+  color: #f4f4f4;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  font-weight: 700;
+  font-size: 52px;
+  text-transform: uppercase;
+  line-height: 0;
+}
+.section-title p {
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 575px) {
+  .section-title h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+  .section-title span {
+    font-size: 38px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  background: rgba(25, 25, 25, 0.95);
+  padding: 10px 0;
+  color: #fff;
+  font-size: 14px;  
+}
+
+#footer .copyright {
+  text-align: center;
+}
+
+@media (max-width: 575px) {
+  #footer .footer-top .footer-info {
+    margin: -20px 0 30px 0;
+  }
+}
+
+/*--------------------------------------------------------------
+# Artist, Album Detail Page Header
+--------------------------------------------------------------*/
+.pageinfo .page-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 10px 0;
+  padding: 10px 0;
+  overflow: hidden;
+}
+.pageinfo .page-artistmember, 
+.page-artistgroupname,
+.page-albumtitle, 
+.page-albumtype, 
+.page-albumreleasedate {
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+}
+.pageinfo .page-songartist {
+  margin-right: 0.5rem ;
+  font-size: 14px;
+}
+
+.pageinfo .pageheader a:hover {
+  text-decoration: underline;
+}
+
+.cover {
+  border-radius: 10px;
+  aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
+  overflow: hidden;
+  position: relative;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover .artwork {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #181818;
+}
+
+.cover-placeholder svg {
+  width: 40%;
+  height: 40%;
+  opacity: 0.6;
+}
+
+
+/*--------------------------------------------------------------
+# Artist, Album Contents
+--------------------------------------------------------------*/
+.contents {
+  padding: 0;
+  margin: 0;
+}
+
+.contents img{
+  max-width: 100%;
+  height: auto;
+}
+
+.contents section {
+  margin-bottom: 30px;
+}
+
+.contents .songlist {
+  padding: 18px 30px;
+  color: #b3b3b3;
+  border-radius: 5px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.contents .songlist a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.contents .songlist img {
+  width: 50px;
+  border-radius: 5px;
+}
+
+.contents .songlist span {
+  color: #aaaaaa;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+.contents .songlist h4 {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0;
+  margin:0;
+  color: #ffffff;
+}
+.contents .songlist p {
+  color: #aaaaaa;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+.contents .songlist:hover {
+  background: #333;
+  transition: all 0.1s ease;
+}
+
+
+/*--------------------------------------------------------------
+# Album Discography Filter
+--------------------------------------------------------------*/
+.albumtype #album-filters {
+  padding: 0;
+  margin: 0 auto 25px auto;
+  list-style: none;
+  border-radius: 50px;
+}
+.albumtype #album-filters li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 5px;
+  transition: all 0.1s ease-in-out;
+  background-color: #333;
+  border-radius: 5px;
+}
+.albumtype #album-filters li:hover, .albumtype #album-filters li.filter-active {
+  background-color: #666;
+}
+
+.discography {
+  margin: 0;
+}
+
+ .contents-item {
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+ .contents-item img {
+  border-radius: 10px;
+}
+
+ .contents-item h5 {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0;
+  margin:10px 0;
+  color: #ffffff;
+  overflow:hidden;
+}
+
+ .contents-item p {
+  color: #aaaaaa;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+ .contents-item .contents-item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+ .contents-item:hover {
+  background: #333;
+  transition: all 0.1s ease;
+}
+
+.samplecount {
+  padding: 2px 5px;
+  border-radius: 5px;
+  background-color: #777;
+  color: #fff;
+  font-size: 14px;
+}
+
+/*--------------------------------------------------------------
+# Detail Page Top Bar
+--------------------------------------------------------------*/
+#pagetopbar {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  padding: 2px 0;
+  z-index: 990;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  opacity: 0;
+  overflow:hidden;
+}
+
+#pagetopbar.fixed{
+  background: rgba(25, 25, 25, 0.95);
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+/*--------------------------------------------------------------
+# 곡 비교 페이지
+--------------------------------------------------------------*/
+.compare .song {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 20px;
+  overflow: hidden;
+  background: #333;
+  border-radius: 10px;
+}
+
+.compare .song a:hover{
+  text-decoration: underline;
+}
+
+.compare .song .samplingbadge{
+  padding: 0 5px;
+  border-radius: 5px;
+  background-color: #f7c94c;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.compare .song .originalbadge{
+  padding: 0 5px;
+  border-radius: 5px;
+  background-color: #487be7;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.compare .song .media-wrapper{
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 정사각형 비율 유지 */
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compare .song iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.compare .song .media-placeholder {
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  background: #222;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compare .song .time {
+  font-size: 13px;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+}
+
+.compare .song .time .time-highlight {
+  cursor: pointer;
+  color: #36e2b7;
+}
+
+.compare .song .song-title {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.compare .song .artist-name {
+  display: inline-block;
+  font-size: 14px;
+  color: #b3b3b3;
+  margin-bottom: 10px;
+}
+.compare .song .albun-title, .producer-name, .contributor {
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .compare .song {
+    padding: 15px;
+  }
+
+  .compare .song .media-wrapper {
+    aspect-ratio: 1 / 1; /* 모바일에서도 정사각형 유지 */
+  }
+}

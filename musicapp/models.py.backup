@@ -1,0 +1,33 @@
+from django.db import models
+
+# Create your models here.
+class Artist(models.Model):
+    artist_name = models.CharField(max_length=20)
+    artist_kname = models.CharField(max_length=20)
+    artist_group = models.CharField(max_length=20, null=True)
+    artist_member = models.CharField(max_length=50, null=True)
+    sample_count = models.IntegerField(null=True)
+    sampled_count = models.IntegerField(null=True)
+
+class Album(models.Model):
+    album_title = models.CharField(max_length=50)
+    album_artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    album_type = models.CharField(max_length=10)
+    album_release_date = models.DateField()
+    album_sample_count = models.IntegerField(null=True)
+
+class Song(models.Model):
+    song_title = models.CharField(max_length=100)
+    song_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='song_artist')
+    song_album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='song_album')
+    song_producer = models.CharField(max_length=20, null=True)
+    song_timestamp = models.CharField(max_length=5, default="00:00")
+    song_link = models.CharField(max_length=100, null=True)
+    sample_title = models.CharField(max_length=100)
+    # sample_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='sample_artist')
+    sample_artist = models.CharField(max_length=20)
+    sample_album = models.CharField(max_length=50, null=True)
+    sample_producer = models.CharField(max_length=20, null=True)
+    sample_timestamp = models.CharField(max_length=5, default="00:00")
+    sample_link = models.CharField(max_length=100, null=True)
+    sample_contributor = models.CharField(max_length=20, null=True)
